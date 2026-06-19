@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas Nascimento | Terminal Portfólio</title>
+    <style>
+        /* Variáveis do Sistema Cyber */
+        :root {
+            --matrix-black: #000000;
+            --cyber-dark: rgba(8, 8, 12, 0.9);
+            --neon-red: #ff2a2a;
+            --neon-red-glow: rgba(255, 42, 42, 0.4);
+            --pure-white: #ffffff;
+            --cyber-silver: #e5e7eb;
+            --dark-gray: #6b7280;
+            --border-glow: #260a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Consolas, monospace;
+        }
+
+        /* Papel de Parede Animado e Fluido */
+        body {
+            background: linear-gradient(135deg, #000000, #0a0101, #000000, #120000);
+            background-size: 400% 400%;
+            animation: fluidGlow 20s ease infinite;
+            color: var(--pure-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Grade Tecnológica Flutuante */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 42, 42, 0.012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 42, 42, 0.012) 1px, transparent 1px);
+            background-size: 35px 35px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes fluidGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Mecanismo de Abas Ocultas (Pure CSS Setup) */
+        .tab-trigger {
+            display: none;
+        }
+
+        /* Cabeçalho */
+        header {
+            position: relative;
+            z-index: 1;
+            padding: 60px 20px 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            color: var(--pure-white);
+        }
+
+        header h1 span {
+            color: var(--neon-red);
+            text-shadow: 0 0 20px var(--neon-red);
+            animation: pulseGlow 2.5s infinite alternate;
+        }
+
+        .target-badge {
+            display: inline-block;
+            background: rgba(255, 42, 42, 0.1);
+            border: 1px solid var(--neon-red);
+            color: var(--pure-white);
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 4px 12px;
+            border-radius: 3px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--cyber-silver);
+            max-width: 750px;
+            margin: 15px auto 0 auto;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.8; text-shadow: 0 0 10px var(--neon-red); }
+            100% { opacity: 1; text-shadow: 0 0 25px var(--neon-red); }
+        }
+
+        /* Menu de Navegação Interativo (Atua como os Labels dos Inputs) */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        nav .menu-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav label {
+            display: block;
+            color: var(--cyber-silver);
+            padding: 18px 25px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            text-align: center;
+        }
+
+        nav label:hover {
+            color: var(--neon-red);
+            background: rgba(255, 42, 42, 0.02);
+        }
+
+        nav label::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 50%;
+            width: 0; height: 2px;
+            background: var(--neon-red);
+            box-shadow: 0 0 10px var(--neon-red);
+            transition: all 0.3s;
+        }
+
+        nav label:hover::after {
+            width: 100%; left: 0;
+        }
+
+        /* Regras de Ativação Visual das Abas */
+        #core-data-control:checked ~ nav label[for="core-data-control"],
+        #engenharia-control:checked ~ nav label[for="engenharia-control"],
+        #career-control:checked ~ nav label[for="career-control"] {
+            color: var(--neon-red);
+        }
+
+        #core-data-control:checked ~ nav label[for="core-data-control"]::after,
+        #engenharia-control:checked ~ nav label[for="engenharia-control"]::after,
+        #career-control:checked ~ nav label[for="career-control"]::after {
+            width: 100%; left: 0;
+        }
+
+        /* SEÇÃO DE HABILIDADES: Barra de Rolagem Horizontal Superior */
+        .skills-section {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 25px auto 0 auto;
+            padding: 0 24px;
+        }
+
+        .skills-wrapper {
+            background: var(--cyber-dark);
+            border: 1px solid #1a1a24;
+            border-radius: 6px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .skills-wrapper h2 {
+            font-size: 0.75rem;
+            color: var(--neon-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            border-right: 2px solid var(--border-glow);
+            padding-right: 15px;
+        }
+
+        .skills-list {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+            overflow-x: auto;
+            width: 100%;
+            padding-bottom: 5px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--neon-red) var(--matrix-black);
+        }
+
+        .skills-list::-webkit-scrollbar { height: 4px; }
+        .skills-list::-webkit-scrollbar-track { background: var(--matrix-black); }
+        .skills-list::-webkit-scrollbar-thumb { background: var(--neon-red); border-radius: 2px; }
+
+        .skills-list li {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #222;
+            color: var(--pure-white);
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        /* Container de Exibição das Janelas Mestre */
+        .window-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 25px auto 50px auto;
+            padding: 0 24px;
+        }
+
+        /* Formatação Idêntica para Todos os Módulos/Abas */
+        .terminal-block {
+            display: none; /* Escondido por padrão */
+            background: var(--cyber-dark);
+            border: 1px solid #16161f;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: relative;
+            animation: terminalInit 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes terminalInit {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terminal-block::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px;
+            width: 14px; height: 14px;
+            border-top: 2px solid var(--neon-red);
+            border-left: 2px solid var(--neon-red);
+        }
+
+        .terminal-block h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            color: var(--pure-white);
+            border-bottom: 1px solid #16161f;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .terminal-block h2::after {
+            content: 'SYS_EXEC';
+            font-size: 0.6rem;
+            color: #00ff66;
+            background: rgba(0, 255, 102, 0.1);
+            padding: 3px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+
+        .terminal-block p {
+            color: var(--cyber-silver);
+            font-size: 0.98rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Lógica do Chaveador de Abas Baseado nos Inputs Ativos */
+        #core-data-control:checked ~ .window-container #sobre-module { display: block; }
+        #engenharia-control:checked ~ .window-container #projetos-module { display: block; }
+        #career-control:checked ~ .window-container #career-module { display: block; }
+
+        /* Renderização de Sub-Cards dentro de Projetos */
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        article {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #16161f;
+            padding: 25px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        article:hover {
+            border-color: var(--neon-red);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        article h3 {
+            color: var(--pure-white);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Linha do Tempo Terminal Unificada */
+        .timeline {
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 35px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 5px; bottom: 5px;
+            width: 1px;
+            background: #1c1c24;
+        }
+
+        .timeline li {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: -24px; top: 6px;
+            width: 7px; height: 7px;
+            background: var(--neon-red);
+            box-shadow: 0 0 8px var(--neon-red);
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--pure-white);
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin-top: 3px;
+        }
+
+        /* Bloco Interno de Redes de Conexão */
+        .networking-box {
+            border-top: 1px solid #16161f;
+            padding-top: 25px;
+            margin-top: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            color: var(--cyber-silver);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-red);
+        }
+
+        /* Rodapé */
+        footer {
+            background: #040406;
+            border-top: 1px solid var(--border-glow);
+            color: var(--dark-gray);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: auto;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: var(--pure-white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--neon-red);
+        }
+
+        /* RESPONSIVIDADE COMPLETA */
+        @media (max-width: 800px) {
+            header h1 { font-size: 2.3rem; }
+            .skills-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .skills-wrapper h2 {
+                border-right: none;
+                border-bottom: 1px solid var(--border-glow);
+                padding-bottom: 5px;
+                width: 100%;
+            }
+            .terminal-block { padding: 25px; }
+        }
+
+        @media (max-width: 600px) {
+            nav .menu-container {
+                flex-direction: column;
+            }
+            nav label {
+                padding: 15px;
+                border-bottom: 1px solid #101015;
+            }
+            .social-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Triggers de Controle das Abas (Escondidos) -->
+    <input type="radio" id="core-data-control" name="terminal-system" class="tab-trigger" checked>
+    <input type="radio" id="engenharia-control" name="terminal-system" class="tab-trigger">
+    <input type="radio" id="career-control" name="terminal-system" class="tab-trigger">
+
+    <!-- Cabeçalho Principal -->
+    <header id="inicio">
+        <h1>Nicolas <span>Nascimento</span></h1>
+        <div class="target-badge">Junior Backend & Automation Developer</div>
+        <p>Especializado em engenharia de dados, construção de APIs lógicas e automação de processos corporativos complexos focado em ganho de eficiência operacional.</p>
+    </header>
+
+    <!-- Barra de Navegação Superior (Atua no chaveamento das abas) -->
+    <nav>
+        <div class="menu-container">
+            <label for="core-data-control">// Core_Data</label>
+            <label for="engenharia-control">// Engenharia_Projetos</label>
+            <label for="career-control">// Career_Nodes</label>
+        </div>
+    </nav>
+
+    <!-- Barra de Rolagem Horizontal Superior Permanente -->
+    <section class="skills-section" id="habilidades">
+        <div class="skills-wrapper">
+            <h2>Tech_Stack</h2>
+            <ul class="skills-list">
+                <li>PYTHON [DATA/AUTOMATION]</li>
+                <li>JAVA [CORE/OOP]</li>
+                <li>SQL [RELATIONAL DB]</li>
+                <li>FIREBASE [NOSQL/AUTH]</li>
+                <li>REACT NATIVE [MOBILE APPS]</li>
+                <li>EXPO INFRASTRUCTURE</li>
+                <li>OPENPYXL [DATA PIPELINES]</li>
+                <li>HTML5 SEMÂNTICO</li>
+                <li>CSS3 COMPILADO PURE</li>
+                <li>GIT & GITHUB [VERSIONAMENTO]</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Container do Painel de Janelas de Exibição -->
+    <div class="window-container">
+        
+        <!-- ABA 01: Core_Data -->
+        <section id="sobre-module" class="terminal-block">
+            <h2>System_Bio</h2>
+            <p>Sou graduando em <strong>Análise e Desenvolvimento de Sistemas</strong> e atuo no mercado corporativo como <strong>Comprador</strong>. Essa intersecção única me permite ter uma visão altamente estratégica de negócios: sei exatamente como mapear dores de processos manuais e traduzi-las em código performático e limpo.</p>
+            <p>Tenho facilidade para lidar com lógica estruturada e arquitetura de dados, acumulando resiliência e foco vindos de experiências dinâmicas na indústria e operações de atendimento em larga escala. Busco atuar na otimização de sistemas computacionais e desenvolvimento backend.</p>
+        </section>
+
+        <!-- ABA 02: Engenharia_Projetos -->
+        <section id="projetos-module" class="terminal-block">
+            <h2>Production_Output</h2>
+            <div class="projects-grid">
+                
+                <article>
+                    <h3>[PROJETO_01] o-vizinho-resolve — Mobile Back-End Integration</h3>
+                    <p>Aplicativo móvel desenvolvido com <strong>React Native e Expo</strong> voltado para soluções de demandas locais. Arquitetou a integração serverless com a plataforma <strong>Firebase</strong>, gerenciando o fluxo de autenticação de acessos e a persistência de dados em tempo real.</p>
+                </article>
+
+                <article>
+                    <h3>[PROJETO_02] Pipeline de Automação de Dados Industriais</h3>
+                    <p>Solução backend inteligente em <strong>Python</strong> para resolver um gargalo logístico real. O software utiliza a engenharia da biblioteca <strong>Openpyxl</strong> para fazer a varredura e o tratamento assíncrono de relatórios isolados de 62 filiais corporativas diferentes, gerando uma base de dados analítica mestra consolidada.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ABA 03: Career_Nodes (Janela Isolada com Mesma Formatação) -->
+        <section id="career-module" class="terminal-block">
+            <h2>Career_&_Access_Logs</h2>
+            <p>Histórico operacional consolidado e canais de comunicação direta para validação de sistemas e parcerias de engenharia:</p>
+            
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-title">Formação Acadêmica</div>
+                    <div class="timeline-desc">Tecnólogo em Análise e Desenvolvimento de Sistemas</div>
+                </li>
+                <li>
+                    <div class="timeline-title">Cadeia de Suprimentos</div>
+                    <div class="timeline-desc">Comprador Corporativo — Gestão de Contratos e Negociações</div>
+                </li>
+                <li>
+                    <div class="timeline-title">graduação tecnica/ensino medio </div>
+                    <div class="timeline-desc">Genrência em saúde</div>
+                </li>
+                
+            </ul>
+
+            <div class="networking-box">
+                <p style="font-size: 0.9rem; color: var(--cyber-silver); margin-bottom: 5px;">
+                    <strong>Localização:</strong> Freguesia, Jacarepaguá | Rio de Janeiro — RJ
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank">// conectar_github</a>
+                    <a href="https://linkedin.com" target="_blank">// conectar_linkedin</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Sys.Admin Contact: <a href="mailto:niamorim14@outlook.com">niamorim14@outlook.com</ a></p>
+     <p>
+        <a href="mailto: +55 21 98047-6367"> WhatsApp: (21) 98047-6367</ a></p>
+        <p>&copy; 2026 Nicolas Nascimento | Compilado sob a arquitetura HTML5 e CSS3 Estrutural.</p>
+    </footer>
+
+</body>
+</html>
