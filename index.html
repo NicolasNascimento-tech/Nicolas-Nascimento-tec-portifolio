@@ -1,584 +1,77 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas Nascimento | Backend Engineer Terminal</title>
-    <style>
-        /* Variáveis de Design - Sistema de Alta Performance Cyberpunk */
-        :root {
-            --bg-absolute: #000000;
-            --bg-card: rgba(10, 10, 15, 0.85);
-            --bg-card-mobile: #0d0d13;
-            --neon-red: #ff3333;
-            --neon-glow: rgba(255, 51, 51, 0.25);
-            --text-primary: #ffffff;
-            --text-secondary: #d1d5db;
-            --text-muted: #6b7280;
-            --border-grid: #1a1a24;
-            --font-code: 'Consolas', 'Fira Code', monospace;
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+<!-- ABA 03: Career_Nodes (VERSÃO COM ROADMAP DE PROJETOS FUTUROS) -->
+<section id="career-module" class="terminal-block">
+    <h2>Career_&_Access_Logs</h2>
+    <p class="tab-instruction">// Carregando histórico profissional e roadmap de desenvolvimento...</p>
+    
+    <div class="timeline-container">
+        <h3 class="log-subheader">[LOG_01: EXPERIÊNCIA PROFISSIONAL]</h3>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-title">Comprador Corporativo</div>
+                <div class="timeline-company">SUPPLY CHAIN & NEGÓCIOS // ATUAL</div>
+                <div class="timeline-desc">Atuação estratégica na gestão de suprimentos, análise analítica de contratos comerciais, negociações de alto impacto e desenvolvimento de fluxos operacionais internos. Interface direta com lideranças para otimização de custos.</div>
+            </li>
+            <li>
+                <div class="timeline-title">Auxiliar de Produção</div>
+                <div class="timeline-company">MANUFATURA // FÁBRICA REGINAVES</div>
+                <div class="timeline-desc">Trabalho em ambiente industrial de alta cadência. Foco total em disciplina operacional, cumprimento rigoroso de metas de qualidade, prazos severos e forte dinâmica de trabalho em equipe.</div>
+            </li>
+            <li>
+                <div class="timeline-title">Atendente Geral</div>
+                <div class="timeline-company">OPERAÇÕES // MCDONALD'S</div>
+                <div class="timeline-desc">Atendimento massivo ao cliente sob extrema pressão. Desenvolvimento de resiliência, resolução rápida de problemas em tempo real, inteligência emocional e agilidade de processos.</div>
+            </li>
+        </ul>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        <h3 class="log-subheader">[LOG_02: FORMAÇÃO ACADÊMICA]</h3>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-title">Análise e Desenvolvimento de Sistemas</div>
+                <div class="timeline-company">ESTÁCIO // ENSINO SUPERIOR</div>
+                <div class="timeline-desc">Foco em Engenharia de Software, Estrutura de Dados, Análise Lógica de Sistemas e Arquitetura de Computadores.</div>
+            </li>
+        </ul>
 
-        /* OTIMIZAÇÃO: Animação fluida nativa apenas para quem tem hardware de sobra */
-        body {
-            background: linear-gradient(135deg, #000000, #0a0101, #000000, #140202);
-            background-size: 400% 400%;
-            animation: ambientFluid 22s ease infinite;
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        @keyframes ambientFluid {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Grade Tecnológica de Fundo - Otimizada com opacidade baixíssima estática */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 51, 51, 0.005) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 51, 51, 0.005) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .tab-trigger {
-            display: none;
-        }
-
-        /* Cabeçalho Profissional */
-        header {
-            position: relative;
-            z-index: 1;
-            padding: 50px 24px 25px 24px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            color: var(--text-primary);
-        }
-
-        header h1 span {
-            color: var(--neon-red);
-            text-shadow: 0 0 15px var(--neon-glow);
-        }
-
-        .target-badge {
-            display: inline-block;
-            background: rgba(255, 51, 51, 0.06);
-            border: 1px solid rgba(255, 51, 51, 0.3);
-            color: var(--text-primary);
-            font-family: var(--font-code);
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            padding: 6px 16px;
-            border-radius: 4px;
-            margin-top: 12px;
-        }
-
-        .target-badge::after {
-            content: ' _';
-            animation: terminalCursor 1s infinite step-end;
-            color: var(--neon-red);
-            font-weight: bold;
-        }
-
-        @keyframes terminalCursor {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        header p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 18px auto 0 auto;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        /* Menu de Controle em Abas */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-grid);
-        }
-
-        nav .menu-container {
-            display: flex;
-            justify-content: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        nav label {
-            display: block;
-            color: var(--text-secondary);
-            font-family: var(--font-code);
-            padding: 18px 24px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: color 0.2s;
-            position: relative;
-            text-align: center;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-
-        /* OTIMIZAÇÃO: Isolando efeitos de hover apenas para computadores */
-        @media (hover: hover) {
-            nav label:hover {
-                color: var(--neon-red);
-            }
-            nav label::after {
-                content: '';
-                position: absolute;
-                bottom: -1px; left: 50%;
-                width: 0; height: 2px;
-                background: var(--neon-red);
-                box-shadow: 0 0 8px var(--neon-red);
-                transition: all 0.2s ease;
-            }
-            nav label:hover::after {
-                width: 100%;
-                left: 0;
-            }
-        }
-
-        #core-data-control:checked ~ nav label[for="core-data-control"],
-        #engenharia-control:checked ~ nav label[for="engenharia-control"],
-        #career-control:checked ~ nav label[for="career-control"] {
-            color: var(--neon-red);
-            background: rgba(255, 51, 51, 0.02);
-        }
-
-        /* Linha inferior ativa funciona de forma simplificada e nativa */
-        #core-data-control:checked ~ nav label[for="core-data-control"]::after,
-        #engenharia-control:checked ~ nav label[for="engenharia-control"]::after,
-        #career-control:checked ~ nav label[for="career-control"]::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0;
-            width: 100%; height: 2px;
-            background: var(--neon-red);
-        }
-
-        /* Seção de Competências Técnicas */
-        .skills-section {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 25px auto 0 auto;
-            padding: 0 24px;
-        }
-
-        .skills-wrapper {
-            background: var(--bg-card);
-            border: 1px solid var(--border-grid);
-            border-radius: 6px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .skills-wrapper h2 {
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            color: var(--neon-red);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            white-space: nowrap;
-            border-right: 1px solid var(--border-grid);
-            padding-right: 15px;
-        }
-
-        .skills-list {
-            display: flex;
-            gap: 10px;
-            list-style: none;
-            overflow-x: auto;
-            width: 100%;
-            padding-bottom: 4px;
-            scrollbar-width: thin;
-        }
-
-        .skills-list li {
-            background: rgba(20, 20, 25, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
-            font-family: var(--font-code);
-            padding: 6px 14px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            white-space: nowrap;
-            border-radius: 4px;
-        }
-
-        @media (hover: hover) {
-            .skills-list li:hover {
-                border-color: var(--neon-red);
-                color: var(--text-primary);
-                background: rgba(255, 51, 51, 0.08);
-                box-shadow: 0 0 10px var(--neon-glow);
-                transform: translateY(-1px);
-            }
-        }
-
-        /* Janela de Exibição Mestre */
-        .window-container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 25px auto 60px auto;
-            padding: 0 24px;
-            flex-grow: 1;
-        }
-
-        /* OTIMIZAÇÃO: Animação de entrada rápida e sem will-change desnecessário */
-        .terminal-block {
-            display: none; 
-            background: var(--bg-card);
-            border: 1px solid var(--border-grid);
-            padding: 35px;
-            border-radius: 6px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            animation: terminalBoot 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes terminalBoot {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* OTIMIZAÇÃO: Brilho na caixa inteira exclusivo para Desktop */
-        @media (hover: hover) {
-            .terminal-block:hover {
-                border-color: rgba(255, 51, 51, 0.4);
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 51, 51, 0.1);
-            }
-        }
-
-        .terminal-block h2 {
-            font-family: var(--font-code);
-            font-size: 1.15rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            color: var(--text-primary);
-            border-bottom: 1px solid var(--border-grid);
-            padding-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .terminal-block h2::after {
-            content: 'SECURE_NODE';
-            font-size: 0.6rem;
-            color: #00ff66;
-            background: rgba(0, 255, 102, 0.08);
-            border: 1px solid rgba(0, 255, 102, 0.2);
-            padding: 3px 8px;
-            border-radius: 3px;
-        }
-
-        .terminal-block p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 18px;
-        }
-
-        .terminal-block strong {
-            color: var(--text-primary);
-        }
-
-        #core-data-control:checked ~ .window-container #sobre-module { display: block; }
-        #engenharia-control:checked ~ .window-container #projetos-module { display: block; }
-        #career-control:checked ~ .window-container #career-module { display: block; }
-
-        /* Grade de Projetos */
-        .projects-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        article {
-            background: rgba(5, 5, 8, 0.5);
-            border: 1px solid var(--border-grid);
-            padding: 24px;
-            border-radius: 4px;
-        }
-
-        @media (hover: hover) {
-            article:hover {
-                border-color: rgba(255, 51, 51, 0.3);
-                background: rgba(0, 0, 0, 0.8);
-            }
-        }
-
-        .project-metrics {
-            background: rgba(255, 51, 51, 0.03);
-            border-left: 3px solid var(--neon-red);
-            padding: 10px 14px;
-            margin-top: 12px;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        /* Linha do Tempo */
-        .timeline {
-            list-style: none;
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 30px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 5px; bottom: 5px;
-            width: 1px;
-            background: var(--border-grid);
-        }
-
-        .timeline li {
-            position: relative;
-            margin-bottom: 22px;
-        }
-
-        .timeline li::before {
-            content: '';
-            position: absolute;
-            left: -24px; top: 6px;
-            width: 7px; height: 7px;
-            background: var(--neon-red);
-        }
-
-        .timeline-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-primary);
-        }
-
-        .timeline-company {
-            font-size: 0.8rem;
-            color: var(--neon-red);
-            margin-bottom: 4px;
-            font-family: var(--font-code);
-        }
-
-        .timeline-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 3px;
-        }
-
-        .networking-box {
-            border-top: 1px solid var(--border-grid);
-            padding-top: 25px;
-            margin-top: 10px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 24px;
-            margin-top: 15px;
-        }
-
-        .social-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-family: var(--font-code);
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        @media (hover: hover) {
-            .social-links a:hover { color: var(--neon-red); }
-        }
-
-        footer {
-            background: #030305;
-            border-top: 1px solid rgba(255, 51, 51, 0.08);
-            color: var(--text-muted);
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 0.78rem;
-            margin-top: auto;
-        }
-
-        footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        /* 📱 ULTRA CONFIGURAÇÃO DE PERFORMANCE MOBILE (RESPONSIVO LISO) */
-        @media (max-width: 768px) {
-            body {
-                /* Desativa totalmente o recálculo do gradiente em tempo de execução */
-                animation: none;
-                background: #050508;
-            }
+        <!-- SEÇÃO DE PROJETOS FUTUROS (PLACEHOLDERS DE EVOLUÇÃO) -->
+        <h3 class="log-subheader">[LOG_03: FUTURE_PIPELINES // PRÓXIMOS PROJETOS]</h3>
+        <div class="future-projects-grid" style="display: grid; gap: 15px; margin-top: 10px;">
             
-            nav {
-                /* Remove o filtro de blur que engasga o scroll do celular */
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                background: #000000;
-            }
-
-            .skills-wrapper {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-                background: var(--bg-card-mobile);
-            }
-
-            .skills-wrapper h2 {
-                border-right: none;
-                border-bottom: 1px solid var(--border-grid);
-                padding-bottom: 6px;
-                width: 100%;
-            }
-
-            nav .menu-container {
-                flex-direction: column;
-            }
-
-            nav label {
-                padding: 15px;
-                border-bottom: 1px solid #14141f;
-                max-width: 100%;
-            }
-
-            .terminal-block {
-                /* Converte o container em bloco sólido leve de renderizar */
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                background: var(--bg-card-mobile);
-                padding: 24px;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            }
-
-            header h1 { font-size: 2.1rem; }
-            header p { font-size: 0.95rem; }
-            .social-links { flex-direction: column; gap: 12px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Triggers de Controle das Abas -->
-    <input type="radio" id="core-data-control" name="terminal-system" class="tab-trigger" checked>
-    <input type="radio" id="engenharia-control" name="terminal-system" class="tab-trigger">
-    <input type="radio" id="career-control" name="terminal-system" class="tab-trigger">
-
-    <!-- Cabeçalho Principal -->
-    <header id="inicio">
-        <h1>Nicolas <span>Nascimento</span></h1>
-        <div class="target-badge">Junior Backend & Automation Developer</div>
-        <p>Desenvolvedor de soluções backend focado em arquitetura lógica de dados, criação de scripts inteligentes e automação de processos para ganho de escala e eficiência corporativa.</p>
-    </header>
-
-    <!-- Barra de Navegação Superior Interativa -->
-    <nav>
-        <div class="menu-container">
-            <label for="core-data-control">// Core_Data</label>
-            <label for="engenharia-control">// Engenharia_Projetos</label>
-            <label for="career-control">// Career_Nodes</label>
-        </div>
-    </nav>
-
-    <!-- Barra de Competências Técnicas Permanentes -->
-    <section class="skills-section" id="habilidades">
-        <div class="skills-wrapper">
-            <h2>Tech_Stack</h2>
-            <ul class="skills-list">
-                <li>PYTHON [DATA/AUTOMATION]</li>
-                <li>JAVA [CORE/OOP]</li>
-                <li>SQL [RELATIONAL DB]</li>
-                <li>FIREBASE [NOSQL/AUTH]</li>
-                <li>REACT NATIVE [MOBILE APPS]</li>
-                <li>EXPO INFRASTRUCTURE</li>
-                <li>OPENPYXL [DATA PIPELINES]</li>
-                <li>HTML5 SEMÂNTICO</li>
-                <li>CSS3 COMPILADO PURE</li>
-                <li>GIT & GITHUB [VERSIONAMENTO]</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Container Central de Exibição das Janelas Mestre -->
-    <div class="window-container">
-        
-        <!-- ABA 01: Core_Data -->
-        <section id="sobre-module" class="terminal-block">
-            <h2>System_Bio</h2>
-            <p>Sou graduando em <strong>Análise e Desenvolvimento de Sistemas</strong> com sólida bagagem profissional no setor de suprimentos como <strong>Comprador Corporativo</strong>. Essa vivência me confere uma habilidade rara na TI: excelente visão de negócios, inteligência negocial e capacidade de mapear gargalos operacionais analógicos para transformá-los em códigos velozes e escaláveis.</p>
-            <p>Possuo forte afinidade com lógica estruturada, manipulação de arquivos e bancos de dados. Minha trajetória engloba resiliência técnica construída em rotinas dinâmicas de manufatura e atendimento massivo ao cliente, focando hoje na otimização sistêmica de back-end.</p>
-        </section>
-
-        <!-- ABA 02: Engenharia_Projetos -->
-        <section id="projetos-module" class="terminal-block">
-            <h2>Production_Output</h2>
-            <div class="projects-grid">
-                
-                <article>
-                    <h3>[PROJETO_01] Pipeline de Automação de Dados Corporativos (Python)</h3>
-                    <p>Solução inteligente de engenharia de dados backend desenvolvida para sanar um gargalo de logística de dados comerciais. O software varre, trata de forma assíncrona e consolida relatórios complexos, eliminando completamente a compilação humana manual.</p>
-                    <div class="project-metrics">
-                        <strong>📊 Impacto Operacional:</strong> Automação total do processamento de planilhas isoladas de <strong>62 filiais corporativas distintas</strong> em uma base mestre unificada, mitigando falhas na auditoria e economizando horas de trabalho operacional diário.
-                    </div>
-                </article>
-
-                <article>
-                    <h3>[PROJETO_02] o-vizinho-resolve — Mobile Back-End Integration</h3>
-                    <p>Aplicativo móvel desenvolvido com <strong>React Native e Expo</strong> para conectar demandas de serviços locais em Jacarepaguá. Atuei na interface e na arquitetura de comunicação serverless com o provedor de nuvem.</p>
-                    <div class="project-metrics">
-                        <strong>⚙️ Entrega Técnico:</strong> Integração completa com o ecossistema <strong>Firebase</strong>, estruturando fluxos de autenticação segura e persistência de dados assíncronos em tempo real.
-                    </div>
-                </article>
-
+            <!-- PROJETO FUTURO 1 -->
+            <div style="background: rgba(255, 51, 51, 0.02); border: 1px dashed rgba(255, 51, 51, 0.3); padding: 15px; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <strong style="color: var(--text-primary); font-size: 0.9rem;">API RESTful de Alta Performance (Java + Spring Boot)</strong>
+                    <span style="font-family: var(--font-code); font-size: 0.65rem; color: #00ff66; background: rgba(0, 255, 102, 0.1); padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(0, 255, 102, 0.3);">[COMPILING...]</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+                    Desenvolvimento de uma API robusta para gerenciamento de inventário, aplicando conceitos avançados de Programação Orientada a Objetos, injeção de dependências e persistência de dados com tratamento de exceções estruturado.
+                </p>
             </div>
-        </section>
 
-        <!-- ABA 03: Career_Nodes -->
-        <section id="career-module" class="terminal-block">
-            <h2>Career_&_Access_Logs</h2>
-            <p>Logs estruturados de trajetórias profissionais e nós de conexão ativa para validação técnica:</p>
-            
-            <ul class="timeline">
-                <li>
-                    <div class="timeline-title">F
+            <!-- PROJETO FUTURO 2 (Pronto para você alterar o texto quando começar o próximo) -->
+            <div style="background: rgba(255, 255, 255, 0.01); border: 1px dashed var(--border-grid); padding: 15px; border-radius: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <strong style="color: var(--text-muted); font-size: 0.9rem;">[NOME_DO_PRÓXIMO_PROJETO]</strong>
+                    <span style="font-family: var(--font-code); font-size: 0.65rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 3px;">[ENQUEUED]</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5;">
+                    Espaço reservado para o próximo desafio em arquitetura de dados, microsserviços ou automações avançadas em Python. Sistema pronto para expansão de nós de código.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Módulo de Redes e Conexões Técnicas -->
+    <div class="networking-box">
+        <h3 class="log-subheader">[LOG_04: ENDPOINTS DE CONTATO]</h3>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 10px 0 15px 0;">
+            <strong>Localização Base:</strong> Jacarepaguá | Rio de Janeiro — RJ<br>
+            <strong>Status do Sistema:</strong> Disponível para projetos freelances de automação e oportunidades de estágio/júnior em Backend.
+        </p>
+        <div class="social-links">
+            <a href="https://github.com" target="_blank">// conectar_github</a>
+            <a href="https://linkedin.com" target="_blank">// conectar_linkedin</a>
+            <a href="mailto:niamorim14@outlook.com" class="email-highlight">// enviar_email</a>
+        </div>
+    </div>
+</section>
