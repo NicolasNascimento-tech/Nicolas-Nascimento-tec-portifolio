@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicolas Nascimento | Backend Engineer Terminal</title>
     <style>
-        /* Variáveis de Design - Sistema de Alta Performance */
+        /* Variáveis de Design - Sistema de Alta Performance Cyberpunk */
         :root {
             --bg-absolute: #000000;
             --bg-card: rgba(10, 10, 15, 0.85);
+            --bg-card-mobile: #0d0d13;
             --neon-red: #ff3333;
             --neon-glow: rgba(255, 51, 51, 0.25);
             --text-primary: #ffffff;
@@ -25,7 +26,7 @@
             box-sizing: border-box;
         }
 
-        /* 1. ANIMATION: Ambient Fluid Background */
+        /* OTIMIZAÇÃO: Animação fluida nativa apenas para quem tem hardware de sobra */
         body {
             background: linear-gradient(135deg, #000000, #0a0101, #000000, #140202);
             background-size: 400% 400%;
@@ -44,20 +45,19 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Grade Tecnológica de Fundo */
+        /* Grade Tecnológica de Fundo - Otimizada com opacidade baixíssima estática */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
-                linear-gradient(rgba(255, 51, 51, 0.008) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 51, 51, 0.008) 1px, transparent 1px);
+                linear-gradient(rgba(255, 51, 51, 0.005) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 51, 51, 0.005) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Mecanismo de Abas Ocultas */
         .tab-trigger {
             display: none;
         }
@@ -83,7 +83,6 @@
             text-shadow: 0 0 15px var(--neon-glow);
         }
 
-        /* 2. ANIMATION: Blinking Terminal Cursor */
         .target-badge {
             display: inline-block;
             background: rgba(255, 51, 51, 0.06);
@@ -119,7 +118,7 @@
             line-height: 1.6;
         }
 
-        /* Menu de Controle em Abas (Estilo Painel Corporativo Dev) */
+        /* Menu de Controle em Abas */
         nav {
             position: sticky;
             top: 0;
@@ -145,33 +144,33 @@
             font-size: 0.85rem;
             letter-spacing: 1px;
             cursor: pointer;
-            transition: color 0.3s, background 0.3s;
+            transition: color 0.2s;
             position: relative;
             text-align: center;
             flex-grow: 1;
             max-width: 300px;
         }
 
-        nav label:hover {
-            color: var(--neon-red);
+        /* OTIMIZAÇÃO: Isolando efeitos de hover apenas para computadores */
+        @media (hover: hover) {
+            nav label:hover {
+                color: var(--neon-red);
+            }
+            nav label::after {
+                content: '';
+                position: absolute;
+                bottom: -1px; left: 50%;
+                width: 0; height: 2px;
+                background: var(--neon-red);
+                box-shadow: 0 0 8px var(--neon-red);
+                transition: all 0.2s ease;
+            }
+            nav label:hover::after {
+                width: 100%;
+                left: 0;
+            }
         }
 
-        nav label::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 50%;
-            width: 0; height: 2px;
-            background: var(--neon-red);
-            box-shadow: 0 0 8px var(--neon-red);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        nav label:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        /* Ativação Visual das Abas Ativas */
         #core-data-control:checked ~ nav label[for="core-data-control"],
         #engenharia-control:checked ~ nav label[for="engenharia-control"],
         #career-control:checked ~ nav label[for="career-control"] {
@@ -179,10 +178,15 @@
             background: rgba(255, 51, 51, 0.02);
         }
 
+        /* Linha inferior ativa funciona de forma simplificada e nativa */
         #core-data-control:checked ~ nav label[for="core-data-control"]::after,
         #engenharia-control:checked ~ nav label[for="engenharia-control"]::after,
         #career-control:checked ~ nav label[for="career-control"]::after {
-            width: 100%; left: 0;
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0;
+            width: 100%; height: 2px;
+            background: var(--neon-red);
         }
 
         /* Seção de Competências Técnicas */
@@ -223,14 +227,8 @@
             width: 100%;
             padding-bottom: 4px;
             scrollbar-width: thin;
-            scrollbar-color: var(--neon-red) var(--bg-absolute);
         }
 
-        .skills-list::-webkit-scrollbar { height: 4px; }
-        .skills-list::-webkit-scrollbar-track { background: var(--bg-absolute); }
-        .skills-list::-webkit-scrollbar-thumb { background: var(--neon-red); border-radius: 2px; }
-
-        /* 3. ANIMATION: Tech Stack Continuous Pulse (Hover) */
         .skills-list li {
             background: rgba(20, 20, 25, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -241,15 +239,16 @@
             font-weight: bold;
             white-space: nowrap;
             border-radius: 4px;
-            transition: all 0.3s ease;
         }
 
-        .skills-list li:hover {
-            border-color: var(--neon-red);
-            color: var(--text-primary);
-            background: rgba(255, 51, 51, 0.08);
-            box-shadow: 0 0 10px var(--neon-glow);
-            transform: translateY(-1px);
+        @media (hover: hover) {
+            .skills-list li:hover {
+                border-color: var(--neon-red);
+                color: var(--text-primary);
+                background: rgba(255, 51, 51, 0.08);
+                box-shadow: 0 0 10px var(--neon-glow);
+                transform: translateY(-1px);
+            }
         }
 
         /* Janela de Exibição Mestre */
@@ -262,7 +261,7 @@
             flex-grow: 1;
         }
 
-        /* 4. ANIMATION: Terminal Boot Sequence (Fade-In Up) */
+        /* OTIMIZAÇÃO: Animação de entrada rápida e sem will-change desnecessário */
         .terminal-block {
             display: none; 
             background: var(--bg-card);
@@ -272,20 +271,20 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            position: relative;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            animation: terminalBoot 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: terminalBoot 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes terminalBoot {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Efeito de Interatividade Sofisticado ao passar o mouse */
-        .terminal-block:hover {
-            border-color: rgba(255, 51, 51, 0.4);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 51, 51, 0.08);
+        /* OTIMIZAÇÃO: Brilho na caixa inteira exclusivo para Desktop */
+        @media (hover: hover) {
+            .terminal-block:hover {
+                border-color: rgba(255, 51, 51, 0.4);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 51, 51, 0.1);
+            }
         }
 
         .terminal-block h2 {
@@ -324,7 +323,6 @@
             color: var(--text-primary);
         }
 
-        /* Chaveamento Dinâmico de Exibição */
         #core-data-control:checked ~ .window-container #sobre-module { display: block; }
         #engenharia-control:checked ~ .window-container #projetos-module { display: block; }
         #career-control:checked ~ .window-container #career-module { display: block; }
@@ -341,22 +339,25 @@
             border: 1px solid var(--border-grid);
             padding: 24px;
             border-radius: 4px;
-            transition: border-color 0.3s, background 0.3s;
         }
 
-        article:hover {
-            border-color: rgba(255, 51, 51, 0.4);
-            background: rgba(0, 0, 0, 0.8);
+        @media (hover: hover) {
+            article:hover {
+                border-color: rgba(255, 51, 51, 0.3);
+                background: rgba(0, 0, 0, 0.8);
+            }
         }
 
-        article h3 {
+        .project-metrics {
+            background: rgba(255, 51, 51, 0.03);
+            border-left: 3px solid var(--neon-red);
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 0.9rem;
             color: var(--text-primary);
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            font-weight: 600;
         }
 
-        /* Linha do Tempo Terminal */
+        /* Linha do Tempo */
         .timeline {
             list-style: none;
             position: relative;
@@ -383,7 +384,6 @@
             left: -24px; top: 6px;
             width: 7px; height: 7px;
             background: var(--neon-red);
-            box-shadow: 0 0 6px var(--neon-red);
         }
 
         .timeline-title {
@@ -392,13 +392,19 @@
             color: var(--text-primary);
         }
 
+        .timeline-company {
+            font-size: 0.8rem;
+            color: var(--neon-red);
+            margin-bottom: 4px;
+            font-family: var(--font-code);
+        }
+
         .timeline-desc {
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: 3px;
         }
 
-        /* Módulo de Redes e Conexões */
         .networking-box {
             border-top: 1px solid var(--border-grid);
             padding-top: 25px;
@@ -417,14 +423,12 @@
             font-family: var(--font-code);
             font-size: 0.8rem;
             font-weight: bold;
-            transition: color 0.3s;
         }
 
-        .social-links a:hover {
-            color: var(--neon-red);
+        @media (hover: hover) {
+            .social-links a:hover { color: var(--neon-red); }
         }
 
-        /* Rodapé de Terminal Otimizado */
         footer {
             background: #030305;
             border-top: 1px solid rgba(255, 51, 51, 0.08);
@@ -432,42 +436,64 @@
             text-align: center;
             padding: 30px 20px;
             font-size: 0.78rem;
-            letter-spacing: 0.5px;
             margin-top: auto;
         }
 
         footer a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
         }
 
-        footer a:hover {
-            color: var(--neon-red);
-        }
-
-        /* Responsividade Completa para Dispositivos Móveis e Tablets */
+        /* 📱 ULTRA CONFIGURAÇÃO DE PERFORMANCE MOBILE (RESPONSIVO LISO) */
         @media (max-width: 768px) {
-            header { padding: 35px 20px 20px 20px; }
-            header h1 { font-size: 2.1rem; }
+            body {
+                /* Desativa totalmente o recálculo do gradiente em tempo de execução */
+                animation: none;
+                background: #050508;
+            }
+            
+            nav {
+                /* Remove o filtro de blur que engasga o scroll do celular */
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: #000000;
+            }
+
             .skills-wrapper {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
+                background: var(--bg-card-mobile);
             }
+
             .skills-wrapper h2 {
                 border-right: none;
                 border-bottom: 1px solid var(--border-grid);
                 padding-bottom: 6px;
                 width: 100%;
             }
-            nav .menu-container { flex-direction: column; }
+
+            nav .menu-container {
+                flex-direction: column;
+            }
+
             nav label {
-                padding: 14px;
-                border-bottom: 1px solid #0a0a0f;
+                padding: 15px;
+                border-bottom: 1px solid #14141f;
                 max-width: 100%;
             }
-            .terminal-block { padding: 24px; }
+
+            .terminal-block {
+                /* Converte o container em bloco sólido leve de renderizar */
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--bg-card-mobile);
+                padding: 24px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            }
+
+            header h1 { font-size: 2.1rem; }
+            header p { font-size: 0.95rem; }
             .social-links { flex-direction: column; gap: 12px; }
         }
     </style>
@@ -520,7 +546,7 @@
         <!-- ABA 01: Core_Data -->
         <section id="sobre-module" class="terminal-block">
             <h2>System_Bio</h2>
-            <p>Sou graduando em <strong>Análise e Desenvolvimento de Sistemas</strong> e atuo profissionalmente na engrenagem corporativa como <strong>Comprador</strong>. Essa combinação me confere um diferencial raro na TI: excelente visão de negócios, inteligência negocial e capacidade de mapear gargalos operacionais ocultos para transformá-los em códigos velozes.</p>
+            <p>Sou graduando em <strong>Análise e Desenvolvimento de Sistemas</strong> com sólida bagagem profissional no setor de suprimentos como <strong>Comprador Corporativo</strong>. Essa vivência me confere uma habilidade rara na TI: excelente visão de negócios, inteligência negocial e capacidade de mapear gargalos operacionais analógicos para transformá-los em códigos velozes e escaláveis.</p>
             <p>Possuo forte afinidade com lógica estruturada, manipulação de arquivos e bancos de dados. Minha trajetória engloba resiliência técnica construída em rotinas dinâmicas de manufatura e atendimento massivo ao cliente, focando hoje na otimização sistêmica de back-end.</p>
         </section>
 
@@ -530,13 +556,19 @@
             <div class="projects-grid">
                 
                 <article>
-                    <h3>[PROJETO_01] o-vizinho-resolve — Mobile Back-End Integration</h3>
-                    <p>Aplicativo móvel desenvolvido com <strong>React Native e Expo</strong> para conectar demandas de serviços locais. Fui responsável por arquitetar a integração serverless com o <strong>Firebase</strong>, gerenciando fluxos de autenticação segura e persistência de dados estruturados em tempo real.</p>
+                    <h3>[PROJETO_01] Pipeline de Automação de Dados Corporativos (Python)</h3>
+                    <p>Solução inteligente de engenharia de dados backend desenvolvida para sanar um gargalo de logística de dados comerciais. O software varre, trata de forma assíncrona e consolida relatórios complexos, eliminando completamente a compilação humana manual.</p>
+                    <div class="project-metrics">
+                        <strong>📊 Impacto Operacional:</strong> Automação total do processamento de planilhas isoladas de <strong>62 filiais corporativas distintas</strong> em uma base mestre unificada, mitigando falhas na auditoria e economizando horas de trabalho operacional diário.
+                    </div>
                 </article>
 
                 <article>
-                    <h3>[PROJETO_02] Pipeline de Automação de Dados Industriais (Python)</h3>
-                    <p>Solução inteligente de engenharia de dados backend para sanar um gargalo real de negócios. Desenvolvi um script em <strong>Python e Openpyxl</strong> focado no tratamento analítico assíncrono de planilhas isoladas de <strong>62 filiais corporativas diferentes</strong>, unificando-as automaticamente em uma base mestra consolidada de auditoria.</p>
+                    <h3>[PROJETO_02] o-vizinho-resolve — Mobile Back-End Integration</h3>
+                    <p>Aplicativo móvel desenvolvido com <strong>React Native e Expo</strong> para conectar demandas de serviços locais em Jacarepaguá. Atuei na interface e na arquitetura de comunicação serverless com o provedor de nuvem.</p>
+                    <div class="project-metrics">
+                        <strong>⚙️ Entrega Técnico:</strong> Integração completa com o ecossistema <strong>Firebase</strong>, estruturando fluxos de autenticação segura e persistência de dados assíncronos em tempo real.
+                    </div>
                 </article>
 
             </div>
@@ -545,45 +577,8 @@
         <!-- ABA 03: Career_Nodes -->
         <section id="career-module" class="terminal-block">
             <h2>Career_&_Access_Logs</h2>
-            <p>Histórico de atuação profissional e nós de conexão direta para validação de competências técnicas:</p>
+            <p>Logs estruturados de trajetórias profissionais e nós de conexão ativa para validação técnica:</p>
             
             <ul class="timeline">
                 <li>
-                    <div class="timeline-title">Formação Acadêmica</div>
-                    <div class="timeline-desc">Tecnólogo em Análise e Desenvolvimento de Sistemas</div>
-                </li>
-                <li>
-                    <div class="timeline-title">Cadeia de Suprimentos</div>
-                    <div class="timeline-desc">Comprador Corporativo — Gestão de Contratos e Negociações</div>
-                </li>
-                <li>
-                    <div class="timeline-title">Processos Industriais</div>
-                    <div class="timeline-desc">Auxiliar de Production — Fábrica Reginaves</div>
-                </li>
-                <li>
-                    <div class="timeline-title">Operações de Atendimento</div>
-                    <div class="timeline-desc">Atendente Geral — McDonald's</div>
-                </li>
-            </ul>
-
-            <div class="networking-box">
-                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 5px;">
-                    <strong>Localização Base:</strong> Freguesia, Jacarepaguá | Rio de Janeiro — RJ
-                </p>
-                <div class="social-links">
-                    <a href="https://github.com" target="_blank">// conectar_github</a>
-                    <a href="https://linkedin.com" target="_blank">// conectar_linkedin</a>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>Sys.Admin Gateway: <a href="mailto:niamorim14@outlook.com">niamorim14@outlook.com</a></p>
-        <p>&copy; 2026 Nicolas Nascimento | Arquitetura limpa estruturada em HTML5 & CSS3.</p>
-    </footer>
-
-</body>
-</html>
+                    <div class="timeline-title">F
